@@ -1,0 +1,776 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JobSafe AI | Job Scam Detection</title>
+
+<style>
+:root {
+  --blue: #3d5afe;
+  --navy: #101b35;
+  --text: #18294c;
+  --muted: #617092;
+  --border: #dce5f5;
+  --bg: #f5f8ff;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+}
+header {
+  background: white;
+  height: 76px;
+  padding: 0 6%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #e8edf7;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 23px;
+  font-weight: 800;
+  color: var(--text);
+  text-decoration: none;
+}
+.logo {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  color: white;
+  font-size: 25px;
+  background: linear-gradient(145deg,#6178ff,#2447dc);
+  box-shadow: 0 7px 18px #3d5afe35;
+}
+.brand small {
+  display: block;
+  color: #7180a1;
+  font-size: 11px;
+  font-weight: 500;
+}
+nav { display: flex; align-items: center; gap: 27px; }
+nav a {
+  text-decoration: none;
+  color: #27385e;
+  font-size: 14px;
+  font-weight: 600;
+}
+nav a:hover { color: var(--blue); }
+nav .nav-btn {
+  background: var(--blue);
+  color: white;
+  padding: 12px 17px;
+  border-radius: 9px;
+}
+.hero {
+  background: radial-gradient(circle at 80% 40%,#213d78 0,#15294e 35%,#101b35 75%);
+  color: white;
+}
+.hero-inner {
+  max-width: 1350px;
+  margin: auto;
+  padding: 55px 5%;
+  min-height: 340px;
+  display: grid;
+  grid-template-columns: 1.2fr .8fr;
+  align-items: center;
+  gap: 45px;
+}
+.eyebrow {
+  display: inline-block;
+  border: 1px solid #718bda70;
+  background: #ffffff0d;
+  border-radius: 30px;
+  padding: 8px 14px;
+  color: #c9d7ff;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .5px;
+}
+.hero h1 {
+  font-size: clamp(34px,4vw,49px);
+  line-height: 1.12;
+  letter-spacing: -1.4px;
+  margin: 18px 0;
+}
+.hero h1 span { color: #7890ff; }
+.hero p {
+  color: #c7d2e9;
+  font-size: 16px;
+  line-height: 1.8;
+  max-width: 620px;
+}
+.features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+  margin-top: 25px;
+  font-size: 13px;
+  color: #e2eaff;
+}
+.features span b {
+  color: #8298ff;
+  font-size: 18px;
+  margin-right: 5px;
+}
+
+/* Hero illustration */
+.art {
+  min-height: 240px;
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+.screen {
+  width: min(100%,390px);
+  height: 220px;
+  background: linear-gradient(140deg,#eaf1ff,#fff);
+  border: 7px solid #315db1;
+  border-bottom-width: 13px;
+  border-radius: 20px;
+  padding: 28px;
+  position: relative;
+  box-shadow: 0 20px 45px #0004;
+  transform: perspective(600px) rotateY(-7deg);
+}
+.paper {
+  width: 80%;
+  margin: auto;
+  padding: 18px;
+  background: white;
+  border-radius: 12px;
+  color: #1c3975;
+  box-shadow: 0 6px 20px #19386d20;
+}
+.paper strong { font-size: 15px; }
+.paper i {
+  display: block;
+  height: 8px;
+  border-radius: 8px;
+  background: #dce6fb;
+  margin-top: 12px;
+}
+.magnify {
+  position: absolute;
+  width: 75px;
+  height: 75px;
+  right: 24px;
+  bottom: 22px;
+  border: 9px solid #24539c;
+  border-radius: 50%;
+  background: white;
+  display: grid;
+  place-items: center;
+  font-size: 30px;
+}
+.flag {
+  position: absolute;
+  padding: 10px 13px;
+  border-radius: 9px;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  box-shadow: 0 7px 18px #0002;
+}
+.flag-one { right: 0; top: 5px; background: #a83c55; }
+.flag-two { left: 0; bottom: 5px; background: #176e6a; }
+
+main {
+  max-width: 1350px;
+  margin: 27px auto;
+  padding: 0 25px;
+}
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(0,1.7fr) minmax(280px,.85fr);
+  gap: 19px;
+  align-items: start;
+}
+.panel {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  box-shadow: 0 5px 20px #1e3c7510;
+  padding: 25px;
+}
+.tabs {
+  display: flex;
+  gap: 22px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 22px;
+}
+.tab {
+  background: none;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  padding: 0 9px 14px;
+  font-size: 14px;
+  color: #6b7897;
+  font-weight: 700;
+  cursor: pointer;
+}
+.tab.active {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+.panel h2 { font-size: 21px; }
+.panel p { line-height: 1.65; }
+.muted { color: var(--muted); font-size: 14px; }
+label {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  margin: 15px 0 9px;
+}
+.field {
+  width: 100%;
+  border: 1px solid #d2def2;
+  border-radius: 8px;
+  padding: 14px;
+  font: inherit;
+  color: var(--text);
+  outline: none;
+  background: white;
+}
+.field:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px #3d5afe15;
+}
+textarea.field { min-height: 135px; resize: vertical; }
+.or {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: #8792ac;
+  font-size: 12px;
+  font-weight: 800;
+  margin: 18px 0;
+}
+.or:before, .or:after {
+  content: "";
+  height: 1px;
+  background: var(--border);
+  flex: 1;
+}
+.hint {
+  color: #7986a2;
+  font-size: 11px;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 6px;
+}
+.checkline {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #697897;
+  font-size: 12px;
+  margin: 17px 0;
+}
+.checkline input { accent-color: var(--blue); }
+.primary {
+  border: 0;
+  border-radius: 8px;
+  padding: 14px 22px;
+  background: linear-gradient(135deg,#506bff,#3450e8);
+  color: white;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 7px 16px #3d5afe26;
+}
+.primary:hover { filter: brightness(1.07); }
+.result {
+  display: none;
+  margin-top: 22px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 19px;
+  background: #fbfcff;
+}
+.result.show { display: block; }
+.result-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.pill {
+  border-radius: 30px;
+  padding: 7px 11px;
+  font-size: 12px;
+  font-weight: 800;
+}
+.risk-low { background: #dff7eb; color: #08794c; }
+.risk-medium { background: #fff0c2; color: #8a5a00; }
+.risk-high { background: #ffe1e5; color: #a21d37; }
+.meter {
+  height: 9px;
+  background: #e6ebf7;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 13px 0;
+}
+.meter div {
+  height: 100%;
+  width: 0;
+  transition: width .5s;
+}
+#redFlags {
+  padding-left: 20px;
+  line-height: 1.9;
+  color: #485a7e;
+  font-size: 13px;
+}
+.note {
+  color: #7a87a2;
+  font-size: 11px;
+  line-height: 1.6;
+  margin-top: 15px;
+}
+.side-title {
+  font-size: 19px !important;
+  margin: 0 0 19px;
+}
+.step {
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: 12px;
+  margin: 17px 0;
+  align-items: start;
+}
+.num {
+  width: 34px;
+  height: 34px;
+  background: #edf1ff;
+  color: var(--blue);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+}
+.step p {
+  font-size: 13px;
+  color: #607092;
+  margin: 4px 0;
+}
+.flags {
+  margin-top: 24px;
+  background: #f0f3ff;
+  border-radius: 9px;
+  padding: 17px;
+}
+.flags h3 {
+  color: #3153d9;
+  font-size: 14px;
+  margin: 0 0 10px;
+}
+.flags ul {
+  padding-left: 19px;
+  color: #5c6d91;
+  font-size: 12px;
+  line-height: 2;
+}
+.section-title {
+  font-size: 22px;
+  margin: 30px 0 15px;
+}
+.benefits {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 14px;
+}
+.benefit {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+}
+.benefit .icon {
+  font-size: 25px;
+  color: var(--blue);
+}
+.benefit h3 { font-size: 14px; margin: 8px 0; }
+.benefit p {
+  font-size: 12px;
+  color: #74819d;
+  margin: 0;
+}
+.tips {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 15px;
+  margin-bottom: 35px;
+}
+.tip {
+  padding: 21px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+.tip h3 { font-size: 15px; margin: 0 0 8px; }
+.tip p { color: #697895; font-size: 13px; margin: 0; }
+footer {
+  background: #101d38;
+  color: #c8d3e9;
+  padding: 22px;
+  text-align: center;
+  font-size: 12px;
+}
+footer span { color: #8298ff; }
+
+@media(max-width:900px) {
+  nav { gap: 13px; }
+  .hero-inner { grid-template-columns: 1fr; }
+  .art { display: none; }
+  .workspace { grid-template-columns: 1fr; }
+  .benefits { grid-template-columns: repeat(2,1fr); }
+}
+@media(max-width:550px) {
+  header { padding: 12px 4%; height: auto; gap: 12px; flex-wrap: wrap; }
+  .brand { font-size: 19px; }
+  nav { width: 100%; justify-content: space-between; flex-wrap: wrap; }
+  nav a { font-size: 12px; }
+  nav .nav-btn { padding: 8px; }
+  .hero-inner { padding: 40px 6%; }
+  main { padding: 0 13px; }
+  .panel { padding: 18px; }
+  .tabs { gap: 8px; }
+  .tab { font-size: 12px; padding: 0 3px 12px; }
+  .benefits, .tips { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <a class="brand" href="#home">
+    <div class="logo">🛡</div>
+    <div>JobSafe <span style="color:#3d5afe">AI</span>
+      <small>Detect Fake Jobs & Internships</small>
+    </div>
+  </a>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#checker">Check Job</a>
+    <a href="#about">About</a>
+    <a href="#tips">Tips</a>
+    <a href="#checker" class="nav-btn">Start Checking →</a>
+  </nav>
+</header>
+
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div>
+      <div class="eyebrow">✦ SMARTER • SAFER • CAREER READY</div>
+      <h1>AI-Based <span>Fake Job & Internship</span> Detection System</h1>
+      <p>Check job and internship postings for common scam warning signs before you apply. Make informed decisions and protect your career journey.</p>
+      <div class="features">
+        <span><b>✓</b> Scam warning checks</span>
+        <span><b>✧</b> Quick analysis</span>
+        <span><b>♧</b> Safer applications</span>
+      </div>
+    </div>
+
+    <div class="art">
+      <div class="screen">
+        <div class="paper">
+          <strong>JOB OFFER</strong>
+          <i></i><i></i><i style="width:80%"></i>
+          <i style="width:62%"></i>
+        </div>
+        <div class="magnify">⚠️</div>
+      </div>
+      <div class="flag flag-one">⚠ Suspicious details</div>
+      <div class="flag flag-two">✓ Review before applying</div>
+    </div>
+  </div>
+</section>
+
+<main>
+  <div class="workspace" id="checker">
+    <section class="panel">
+      <div class="tabs">
+        <button class="tab active" id="urlTab" type="button">🔗 Check Job / Internship</button>
+        <button class="tab" id="textTab" type="button">▤ Paste Text</button>
+      </div>
+
+      <h2>Analyze a Job Posting</h2>
+      <p class="muted">Enter the job posting link or paste its description to check common warning signs.</p>
+
+      <form id="checkForm">
+        <label for="jobUrl">Job or internship URL</label>
+        <input class="field" type="url" id="jobUrl" placeholder="https://example.com/job-posting">
+
+        <div class="or">OR</div>
+
+        <label for="jobText">Job description / internship details</label>
+        <textarea class="field" id="jobText" maxlength="5000" placeholder="Paste the complete job description here..."></textarea>
+        <div class="hint">
+          <span>Never include passwords or private information.</span>
+          <span id="count">0/5000</span>
+        </div>
+
+        <label class="checkline">
+          <input type="checkbox" id="companyCheck">
+          I have checked the company name and contact details
+        </label>
+
+        <button class="primary" type="submit">⌕ &nbsp; Analyze Posting</button>
+        <p id="error" style="color:#b4233d;font-size:13px"></p>
+      </form>
+
+      <section class="result" id="result" aria-live="polite">
+        <div class="result-head">
+          <h2>Analysis Summary</h2>
+          <span class="pill" id="riskPill">Risk review</span>
+        </div>
+        <p id="summary" class="muted"></p>
+        <div class="meter"><div id="meterFill"></div></div>
+        <strong id="scoreLabel" style="font-size:13px"></strong>
+        <h3 style="margin-top:18px">Potential Warning Signs</h3>
+        <ul id="redFlags"></ul>
+        <p class="note">This is a front-end demonstration using text patterns, not a trained AI model or employer verification service. A low score does not guarantee that a job is genuine. Verify employers independently.</p>
+      </section>
+    </section>
+
+    <aside class="panel">
+      <h2 class="side-title">⚙ How It Works</h2>
+
+      <div class="step">
+        <div class="num">1</div>
+        <p><strong>Enter details</strong><br>Paste a job link or description.</p>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <p><strong>Analyze the posting</strong><br>Check for common scam patterns.</p>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <p><strong>Review the result</strong><br>Understand the risk estimate and reasons.</p>
+      </div>
+      <div class="step">
+        <div class="num">4</div>
+        <p><strong>Verify independently</strong><br>Confirm the employer before proceeding.</p>
+      </div>
+
+      <div class="flags">
+        <h3>🛡 Common Red Flags We Check</h3>
+        <ul>
+          <li>Registration or training fees</li>
+          <li>Unrealistic salary promises</li>
+          <li>Urgent pressure to accept</li>
+          <li>Requests for bank details or OTPs</li>
+          <li>Personal email addresses</li>
+          <li>Vague role or company details</li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+
+  <section id="about">
+    <h2 class="section-title">✦ Why Use JobSafe AI?</h2>
+    <div class="benefits">
+      <div class="benefit">
+        <div class="icon">♧</div>
+        <h3>Protect Yourself</h3>
+        <p>Notice potential warning signs before applying.</p>
+      </div>
+      <div class="benefit">
+        <div class="icon">◷</div>
+        <h3>Quick Analysis</h3>
+        <p>Review a posting in just a few seconds.</p>
+      </div>
+      <div class="benefit">
+        <div class="icon">✧</div>
+        <h3>Clear Reasons</h3>
+        <p>See which patterns triggered a warning.</p>
+      </div>
+      <div class="benefit">
+        <div class="icon">✓</div>
+        <h3>Apply Carefully</h3>
+        <p>Make safer, informed career decisions.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="tips">
+    <h2 class="section-title">🔎 Quick Safety Tips</h2>
+    <div class="tips">
+      <div class="tip">
+        <h3>Never Pay to Get Hired</h3>
+        <p>Be cautious of requests for registration fees, deposits, or paid training to secure a job.</p>
+      </div>
+      <div class="tip">
+        <h3>Verify the Company</h3>
+        <p>Find the employer's official website and verify contact details independently.</p>
+      </div>
+      <div class="tip">
+        <h3>Protect Your Information</h3>
+        <p>Never share OTPs, passwords, or banking credentials with recruiters.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  © 2026 JobSafe AI &nbsp; | &nbsp; <span>Think Safe • Apply Smart</span>
+  <br>Student Project Prototype • Results are estimates, not guarantees
+</footer>
+
+<script>
+const jobUrl = document.getElementById("jobUrl");
+const jobText = document.getElementById("jobText");
+const result = document.getElementById("result");
+
+document.getElementById("urlTab").addEventListener("click", () => {
+  document.getElementById("urlTab").classList.add("active");
+  document.getElementById("textTab").classList.remove("active");
+  jobUrl.focus();
+});
+
+document.getElementById("textTab").addEventListener("click", () => {
+  document.getElementById("textTab").classList.add("active");
+  document.getElementById("urlTab").classList.remove("active");
+  jobText.focus();
+});
+
+jobText.addEventListener("input", () => {
+  document.getElementById("count").textContent =
+    jobText.value.length + "/5000";
+});
+
+document.getElementById("checkForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const url = jobUrl.value.trim();
+  const text = jobText.value.trim();
+  const error = document.getElementById("error");
+  error.textContent = "";
+
+  if (!url && !text) {
+    error.textContent = "Please enter a job URL or paste a job description.";
+    return;
+  }
+
+  const content = (text + " " + url).toLowerCase();
+  const flags = [];
+
+  const checks = [
+    {
+      pattern: /registration fee|pay.*(fee|deposit)|security deposit|processing fee|pay to apply|training fee|upfront payment|application fee/,
+      message: "The posting may request money or an upfront fee."
+    },
+    {
+      pattern: /guaranteed income|easy money|unlimited earnings|earn money daily|high salary.*no experience/,
+      message: "Income or hiring claims may be unrealistic."
+    },
+    {
+      pattern: /urgent|immediate joining|limited slots|act now|no interview|within 24 hours/,
+      message: "Urgency or pressure language appears in the posting."
+    },
+    {
+      pattern: /otp|one.time password|bank password|upi pin|cvv|share.*password|bank details/,
+      message: "The text mentions sensitive account information."
+    },
+    {
+      pattern: /whatsapp only|telegram only|gmail\.com|yahoo\.com|outlook\.com/,
+      message: "The contact method may need independent verification."
+    },
+    {
+      pattern: /crypto payment|buy gift card|send.*money|refundable fee/,
+      message: "The posting mentions potentially suspicious payment methods."
+    }
+  ];
+
+  checks.forEach(check => {
+    if (check.pattern.test(content)) flags.push(check.message);
+  });
+
+  if (!/responsibilit|qualification|requirement|job role|experience|skills|duties/.test(content)) {
+    flags.push("The posting may lack detailed role requirements or responsibilities.");
+  }
+
+  if (url && !/^https:\/\//i.test(url)) {
+    flags.push("The URL does not use HTTPS. Verify the site carefully.");
+  }
+
+  if (!document.getElementById("companyCheck").checked) {
+    flags.push("You have not confirmed the company's details.");
+  }
+
+  const uniqueFlags = [...new Set(flags)];
+  let score = uniqueFlags.length === 0
+    ? 10
+    : Math.min(95, 8 + uniqueFlags.length * 16);
+
+  let level, className, color;
+
+  if (score >= 55) {
+    level = "High Risk";
+    className = "risk-high";
+    color = "#e64e63";
+  } else if (score >= 30) {
+    level = "Needs Review";
+    className = "risk-medium";
+    color = "#e8a62b";
+  } else {
+    level = "Fewer Warning Signs";
+    className = "risk-low";
+    color = "#16a36a";
+  }
+
+  const pill = document.getElementById("riskPill");
+  pill.textContent = level;
+  pill.className = "pill " + className;
+
+  document.getElementById("summary").textContent =
+    score >= 55
+      ? "Several warning signs were found. Verify the employer independently and do not send money or sensitive information."
+      : score >= 30
+      ? "Some warning signs need further checking. Research the company and confirm the role through official channels."
+      : "Few common warning patterns were detected. This does not prove the opportunity is genuine.";
+
+  const meter = document.getElementById("meterFill");
+  meter.style.width = score + "%";
+  meter.style.background = color;
+
+  document.getElementById("scoreLabel").textContent =
+    "Demo warning indicator: " + score + "/100 (higher means more warning patterns)";
+
+  const list = document.getElementById("redFlags");
+  list.replaceChildren();
+
+  const messages = uniqueFlags.length
+    ? uniqueFlags
+    : ["No listed pattern was detected. Verify the employer independently."];
+
+  messages.forEach(message => {
+    const li = document.createElement("li");
+    li.textContent = message;
+    list.appendChild(li);
+  });
+
+  result.classList.add("show");
+  result.scrollIntoView({ behavior: "smooth", block: "nearest" });
+});
+</script>
+
+</body>
+</html>
